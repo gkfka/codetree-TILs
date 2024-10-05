@@ -102,5 +102,5 @@ for in_y, di in golem:
 
     # 정령 이동
     
-    result = move_elf(x, y)
+    result += move_elf(x, y)
 print(result)
