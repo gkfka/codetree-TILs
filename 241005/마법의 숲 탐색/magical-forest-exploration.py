@@ -6,12 +6,12 @@ golem = [list(map(int, input().split())) for _ in range(k)]
 board = [[1] + [0]*c + [1] for _ in range(r+3)] + [[1]*(c+2)]
 
 # 방향 -> 북동남서(시계)
-dx = [0, 1, 0, -1]
-dy = [1, 0, -1, 0]
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
 
 def move_golem(in_y, di):
     x, y = 1, in_y  # 골렘이 입장 전 상태
-
+    global board
     # 더이상 움직일 수 없을 때 까지
     while True:
         # 남쪽 이동
@@ -51,14 +51,13 @@ def set_golem(x, y, di):
     board[x][y-1:y+2] = [cnt] * 3
     board[x-1][y] = board[x+1][y] = cnt
 
-
     cnt += 1    # 다음 골렘
     exits.append([x + dx[di], y + dy[di]])  # 골렘의 출구 저장
 
 from collections import deque
 # 정령 이동
 def move_elf(x, y):
-    visited = [[1] + [0]*c + [1] for _ in range(r+3)] + [[1]*(c+2)]
+    visited = [[0]*(c+2) for _ in range(r+4)]
 
     q = deque()
     q.append([x, y])
@@ -102,5 +101,6 @@ for in_y, di in golem:
     set_golem(x, y, di)
 
     # 정령 이동
-    result += move_elf(x, y)
+    
+    result = move_elf(x, y)
 print(result)
