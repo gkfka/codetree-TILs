@@ -1,3 +1,10 @@
+# r, c, k = 6, 5, 6
+# golem = [[2, 3],
+#          [2, 0],
+#          [4, 2],
+#          [2, 0],
+#          [2, 0],
+#          [2, 2]]
 r, c, k = map(int, input().split())
 golem = [list(map(int, input().split())) for _ in range(k)]
 
@@ -36,7 +43,7 @@ def move_golem(in_y, dir_out):
             x += 1
         # 서쪽 이동 -> 남쪽 이동, 출구 반시계
         # 왼위, 왼가, 왼아, 왼왼아, 왼아아 빈칸
-        elif y > 2 and x > 1 and sum([board[x-1][y-1], board[x][y-2], board[x+1][y-1], board[x+1][y-2], board[x+2][y]]) == 0:
+        elif y >= 2 and x <= r and sum([board[x-1][y-1], board[x][y-2], board[x+1][y-1], board[x+1][y-2], board[x+2][y]]) == 0:
             x += 1  #남
             y -= 1  #서
             dir_out = (dir_out-1) % 4
