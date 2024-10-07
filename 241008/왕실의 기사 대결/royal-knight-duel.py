@@ -21,12 +21,13 @@ def move_sir(id, di):
     q.append(id)
 
     check = set()
+    check.add(sid)
+
     # 이동이 완료 된 후, 데미지 적용하기 때문에 따로 저장
     demage = [0]* (n+1)
     # print(demage)
     while q:
         sid = q.popleft()
-        check.add(sid)
         # print('이동하는 기사:', sid)
         [x, y], [h, w] = sirs[sid][0], sirs[sid][1]
 
