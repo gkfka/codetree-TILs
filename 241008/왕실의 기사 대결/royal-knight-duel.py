@@ -6,14 +6,10 @@ sirs = [list(map(int, input().split())) for _ in range(n)]
 orders = [list(map(int, input().split()))for _ in range(q)]
 #               x,   y,   크기, 체력, 받은 데미지, 탈락여부
 sirs = {idx+1:[[x-1, y-1], [h, w],  k,      0,        False] for idx, (x, y, h, w, k) in enumerate(sirs)}
-
 # 격자 내부 확인
 def is_board(x, y):
     return 0 <= x < l and 0<= y < l
 
-def printboard(board):
-    for line in board:
-        print(line)
 # 0:위, 1:오, 2:아, 3:왼
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
@@ -59,12 +55,14 @@ def move_sir(id, di):
 
     # 명령 받은 기사의 데미지 0으로
     demage[id] = 0
-    for key, value in sirs.items():
+    # for key, value in sirs.items():
+    for key in check:
         # print(f"{key}기사 {demage[key]}데미지")
         sirs[key][3] += demage[key]
         sirs[key][2] -= demage[key]
         # 받은 데미지가 체력보다 크면 탈락
-        if sirs[key][2] < sirs[key][3]:
+        # if sirs[key][2] > sirs[key][3]:
+        if sirs[key][2] < 0:
             sirs[key][4] = True
         else:
             [sx, sy] = sirs[key][0]
@@ -74,11 +72,12 @@ def move_sir(id, di):
 
 
 
+    # print(x, y)
 # q 개의 명령을 수행
 for id, di in orders:
     # print()
     # print(f"{id}기사가 {di}방향으로 이동")
-    # 탈락한 기사 명령 수행 불가
+    # 탈락한 기사 명령 수행 
     if sirs[id][4]:
         # print('탈락 기사 명령 무시')
         continue
