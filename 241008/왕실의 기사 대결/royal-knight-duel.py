@@ -26,6 +26,7 @@ def move_sir(id, di):
     # print(demage)
     while q:
         sid = q.popleft()
+        check.add(sid)
         # print('이동하는 기사:', sid)
         [x, y], [h, w] = sirs[sid][0], sirs[sid][1]
 
