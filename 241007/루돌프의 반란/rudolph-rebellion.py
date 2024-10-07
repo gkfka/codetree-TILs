@@ -36,11 +36,7 @@ set_board_santa()
 # for idx, (x, y, _, _, alive) in santa.items():
 #     board[x][y] = idx
 
-def printb(board):
-    for line in board:
-        print(line)
 
-# printb(board)
 
 def get_direct(rx, ry, sx, sy):
     # sx, sy = santa[idx][0], santa[idx][1]
@@ -78,7 +74,6 @@ def move_rudolf():
     board[rx][ry] = 0
     rx += dx[di]
     ry += dy[di]
-
     return di
 
 def is_board(x, y):
@@ -93,7 +88,7 @@ def crash(who, sid, di, sx, sy):
     santa[sid][2] += score
 
     # 2. 기절 1턴 동안
-    santa[sid][3] += 2
+    santa[sid][3] = 2
 
     # 3. score만큼 밀려남
     if who == 'santa':
@@ -152,15 +147,11 @@ def move_santa(sid):
     if len(candi) == 0: return
 
     nx, ny, di = candi.pop()
-    # print(sid, '산타 루돌프와 가까워질 방향', di,'이동 좌표', nx, ny)
-    # printb(board)
     # 루돌프 충돌
     # if board[nx][ny] == -1:
     if [rx, ry] == [nx, ny]:
-        # print('산타 루돌프와 충돌')
         crash('santa', sid, di, nx, ny)
     else:
-        # print(f'{sid}산타 {sx, sy} -> {nx, ny}이동')
         santa[sid][0], santa[sid][1] = nx, ny
         board[sx][sy] = 0
         board[nx][ny] = sid
@@ -181,10 +172,9 @@ for mm in range(m):
 
     # 1. 루돌프 이동
     di = move_rudolf()
-    # printb(board)
+
     # 1.1 루돌프 충돌 -> 산타 밀고 착지
     if board[rx][ry] > 0:
-        # print(f"루돌프 {board[rx][ry]}와 충돌")
         crash('rudolf', board[rx][ry], di, rx, ry)
         board[rx][ry] = -1
     # 1.2 충돌 없이 착지
@@ -196,7 +186,6 @@ for mm in range(m):
     for pp in range(1, p+1):
         # 탈락한 산타 이동 불가
         if santa[pp][4] or santa[pp][3] > 0:
-            # print(pp, '기절/탈락')
 
             continue
         # 기절 산타 -1
@@ -209,12 +198,8 @@ for mm in range(m):
     for idx, (_, _, _, _, alive) in santa.items():
         if alive: continue
         santa[idx][2] += 1
-    # print('--')
-    # printb(board)
-    # print(santa)
-    # print(removal)
-    # print(mm)
-    # input(';;;;;;;;;;;')
+
+
 santa = [str(value[2]) for value in santa.values()]
 print(' '.join(santa))
 
