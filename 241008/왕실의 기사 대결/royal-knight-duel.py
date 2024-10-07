@@ -64,7 +64,7 @@ def move_sir(id, di):
         sirs[key][2] -= demage[key]
         # 받은 데미지가 체력보다 크면 탈락
         # if sirs[key][2] > sirs[key][3]:
-        if sirs[key][2] < 0:
+        if sirs[key][2] <= 0:
             sirs[key][4] = True
         else:
             [sx, sy] = sirs[key][0]
