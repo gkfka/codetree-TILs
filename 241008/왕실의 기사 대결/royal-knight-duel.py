@@ -21,7 +21,7 @@ def move_sir(id, di):
     q.append(id)
 
     check = set()
-    check.add(sid)
+    check.add(id)
 
     # 이동이 완료 된 후, 데미지 적용하기 때문에 따로 저장
     demage = [0]* (n+1)
