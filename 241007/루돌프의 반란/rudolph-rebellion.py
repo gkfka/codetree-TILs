@@ -28,14 +28,11 @@ dy = [0, 1, 0, -1, 1, -1, 1, -1]
 
 def set_board_santa():
     for idx, (x, y, _, _, alive) in santa.items():
-        # if alive: continue
-        if not alive:
-            board[x][y] = idx
+        if alive: continue
+        # if not alive:
+        board[x][y] = idx
 
 set_board_santa()
-# for idx, (x, y, _, _, alive) in santa.items():
-#     board[x][y] = idx
-
 
 
 def get_direct(rx, ry, sx, sy):
@@ -117,10 +114,7 @@ def crash(who, sid, di, sx, sy):
     board = [[0] * n for _ in range(n)]
     # 산타, 루돌프 보드 배치
     set_board_santa()
-    # for idx, (x, y, _, _, alive) in santa.items():
-        # if alive: continue
-        # if not alive:
-        #     board[x][y] = idx
+
     board[rx][ry] = -1
     return
 
@@ -136,9 +130,7 @@ def move_santa(sid):
         nx = sx + dx[dd]
         ny = sy + dy[dd]
         # 격자 밖 / 다른 산타 존재
-        if not is_board(nx, ny) or board[nx][ny] > 0:
-
-            continue
+        if not is_board(nx, ny) or board[nx][ny] > 0:   continue
         dist = (rx - nx)**2 + (ry - ny)**2
         if cur_dist > dist:
             cur_dist = dist
@@ -148,8 +140,8 @@ def move_santa(sid):
 
     nx, ny, di = candi.pop()
     # 루돌프 충돌
-    # if board[nx][ny] == -1:
-    if [rx, ry] == [nx, ny]:
+    if board[nx][ny] == -1:
+    # if [rx, ry] == [nx, ny]:
         crash('santa', sid, di, nx, ny)
     else:
         santa[sid][0], santa[sid][1] = nx, ny
@@ -160,12 +152,11 @@ def move_santa(sid):
 
 
 
-
 # m개의 턴
 for mm in range(m):
     # 모든 산타가 탈락 -> 즉시 종료
     if len(removal) == p:break
-
+    # 산타 기절 턴 -1
     for id, info in santa.items():
         if info[3] > 0 and not info[4]:
             santa[id][3] -= 1
@@ -180,18 +171,13 @@ for mm in range(m):
     # 1.2 충돌 없이 착지
     else:
         board[rx][ry] = -1
-    # printb(board)
-    # print('루돌프 이동 완료')
+
     # 2. 산타 이동
     for pp in range(1, p+1):
         # 탈락한 산타 이동 불가
         if santa[pp][4] or santa[pp][3] > 0:
-
             continue
-        # 기절 산타 -1
-        # if santa[pp][3] > 0:
-        #     santa[pp][3] -= 1
-        #     continue
+
         move_santa(pp)
 
     # 3. 살아남은 산타 점수 획득
@@ -202,5 +188,3 @@ for mm in range(m):
 
 santa = [str(value[2]) for value in santa.values()]
 print(' '.join(santa))
-
-    # input()
