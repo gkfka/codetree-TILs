@@ -26,8 +26,9 @@ dy = [0, 1, 0, -1, 1, -1, 1, -1]
 
 def set_board_santa():
     for idx, (x, y, _, _, alive) in santa.items():
-        if alive: continue
-        board[x][y] = idx
+        # if alive: continue
+        if not alive:
+            board[x][y] = idx
 
 set_board_santa()
 # for idx, (x, y, _, _, alive) in santa.items():
@@ -115,10 +116,17 @@ def crash(who, sid, di, sx, sy):
         # 무사히 도착
         else:
             santa[mid][0], santa[mid][1] = nx, ny
+            break
     board = [[0] * n for _ in range(n)]
     # 산타, 루돌프 보드 배치
-    set_board_santa()
+    # set_board_santa()
+    for idx, (x, y, _, _, alive) in santa.items():
+        # if alive: continue
+        if not alive:
+            board[x][y] = idx
     board[rx][ry] = -1
+    return
+
 def move_santa(sid):
     # 루돌프와 가까워지는 방향 탐색
     # 가까워 질 수 없으면 움직이지 않음
