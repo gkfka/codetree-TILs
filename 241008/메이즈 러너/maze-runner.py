@@ -1,20 +1,20 @@
-# n, m, k = map(int, input().split())
+n, m, k = map(int, input().split())
 # # 미로 정보
-# board = [list(map(int, input().split())) for _ in range(n)]
+board = [list(map(int, input().split())) for _ in range(n)]
 #
-# people = [list(map(int, input().split())) for _ in range(m)]
-# ex, ey = map(int, input().split())
+people = [list(map(int, input().split())) for _ in range(m)]
+ex, ey = map(int, input().split())
 
-n, m, k = 5, 3, 8
-board = [[0, 0, 0, 0, 1],
-         [9, 2, 2, 0, 0],
-         [0, 1, 0, 1, 0],
-         [0, 0, 0, 1, 0],
-         [0, 0, 0, 0, 0]]
-people = [[1, 3],
-          [3, 1],
-          [3, 5]]
-ex, ey =  3,3
+# n, m, k = 5, 3, 8
+# board = [[0, 0, 0, 0, 1],
+        #  [9, 2, 2, 0, 0],
+        #  [0, 1, 0, 1, 0],
+        #  [0, 0, 0, 1, 0],
+        #  [0, 0, 0, 0, 0]]
+# people = [[1, 3],
+        #   [3, 1],
+        #   [3, 5]]
+# ex, ey =  3,3
 
 
 # x, y, 이동 거리, 탈출여부
